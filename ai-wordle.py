@@ -19,21 +19,40 @@ container = []
 
 deadLetters = []
 
+possibilities = []
+
 
 for index,letter in enumerate(starting):
     if letter == target[index]:
         found[index] = letter
-        foundIndices[len(foundIndices)] = index
+        foundIndices.append(index)
     elif letter in target:
-        container[len(container)] = letter
+        container.append(letter)
     else:
-        deadLetters[len(deadLetters)] = letter
+        deadLetters.append(letter)
 
-for word in wordList:
-    for num in foundIndices:
-        if found[num] == target[num]:
-            for letter in deadLetters:
-                for 
+
+def gameState():
+    possibilities = []
+    for word in wordList:
+        for num in foundIndices:
+            if found[num] == target[num]:
+                for letter in container:
+                    if letter in target:
+                        for letter in deadLetters:
+                            if letter in target:
+                                break
+                            else:
+                                possibilities[len(possibilities)] = word
+
+gameState()
+
+for word in possibilities:
+    print(word)
+            
+
+
+
 
 
 
