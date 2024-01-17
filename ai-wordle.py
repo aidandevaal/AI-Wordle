@@ -13,24 +13,27 @@ target = wordList[targetIndex]
 starting = "trail"
 
 found = "....."
+foundIndices = []
+
 container = []
-containerIndex = 0
 
 deadLetters = []
-deadLettersIndex = 0
 
 
 for index,letter in enumerate(starting):
     if letter == target[index]:
         found[index] = letter
+        foundIndices[len(foundIndices)] = index
     elif letter in target:
-        container[containerIndex] = letter
-        containerIndex+=1
+        container[len(container)] = letter
     else:
-        deadLetters[deadLettersIndex] = letter
-        deadLettersIndex+=1
+        deadLetters[len(deadLetters)] = letter
 
-
+for word in wordList:
+    for num in foundIndices:
+        if found[num] == target[num]:
+            for letter in deadLetters:
+                for 
 
 
 
