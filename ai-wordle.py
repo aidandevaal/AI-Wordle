@@ -37,16 +37,19 @@ def start():
     choice = input("Enter a string for the AI to crack: ")
     end(choice)
     gameState(choice)
+    AI()
 
 def end(guess):
     if(guess == target):
         print("ez")
         quit()
 
+
 def xor(a, b):
     return ((a and not b) or (not a and b))
 
 def gameState(guess):
+
     for index,letter in enumerate(guess):
         if(letter == target[index]):
             found.insert(index, letter)
@@ -56,6 +59,7 @@ def gameState(guess):
             container.append(letter)
         else:
             deadLetters.append(letter)
+
     if(guess in possibilities):
         possibilities.remove(guess)
     wordCheck()
@@ -82,10 +86,25 @@ def wordCheck():
 
 def AI():
     likelihoods = {}
-    for word in wordList:
+    for word in possibilities:
         for letter in word:
-            
-            likelihoods.update(letter)
+            if(letter not in likelihoods):
+                likelihoods[letter] = 1
+            else:
+                cur = likelihoods.get(letter)
+                cur += 1
+                likelihoods.update({letter:cur})
+    likelihoods.pop("\n")
+
+    for letter in likelihoods:
+        likelihoods.get(letter)
+        
+        
+    print(likelihoods.keys())
+    print(likelihoods.values())
+
+
+
 
 
 def main():
