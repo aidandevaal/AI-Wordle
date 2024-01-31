@@ -45,8 +45,11 @@ def end(guess):
         quit()
 
 
+
 def xor(a, b):
     return ((a and not b) or (not a and b))
+
+
 
 def gameState(guess):
 
@@ -63,6 +66,8 @@ def gameState(guess):
     if(guess in possibilities):
         possibilities.remove(guess)
     wordCheck()
+
+
 
 def wordCheck():
     for word in wordList:
@@ -84,6 +89,8 @@ def wordCheck():
     for word in toRemove:
         possibilities.remove(word)
 
+
+
 def AI():
     likelihoods = {}
     for word in possibilities:
@@ -96,10 +103,19 @@ def AI():
                 likelihoods.update({letter:cur})
     likelihoods.pop("\n")
 
+    likelihoods = dict(sorted(likelihoods.items(), key = lambda item: item[1], reverse = True))
+
+    letters = ["entry"] * len(likelihoods)
+
+    index = 0
+        
     for letter in likelihoods:
-        likelihoods.get(letter)
-        
-        
+        letters[index] = letter
+        index += 1
+
+    index = 0
+
+
     print(likelihoods.keys())
     print(likelihoods.values())
 
