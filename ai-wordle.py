@@ -1,6 +1,7 @@
 ### Wordle Solver
 ### Python Project
 
+import itertools
 import random
 
 myDict = open("wdict.txt","r")
@@ -106,18 +107,40 @@ def AI():
     likelihoods = dict(sorted(likelihoods.items(), key = lambda item: item[1], reverse = True))
 
     letters = ["entry"] * len(likelihoods)
-
     index = 0
-        
     for letter in likelihoods:
         letters[index] = letter
         index += 1
 
+    combos = []
+    for letter in range(0, len(letters)):
+        combos.extend(itertools.combinations(letters, 5))
+
+    combinations = ["entry"] * len(combos)
     index = 0
+    for combo in combos:
+        word = ""
+        for value in combo:
+            word += value
+        combinations[index] = word
+        index += 1
 
+    potentials = ["aaaaa"] * len(possibilities)
+    index = 0
+    for word in combinations:
+        if word in possibilities:
+            potentials[index] = word
+            index += 1
 
+    for word in combinations:
+        print(word)
+
+            
+
+'''
     print(likelihoods.keys())
     print(likelihoods.values())
+'''
 
 
 
