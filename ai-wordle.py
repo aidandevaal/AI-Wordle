@@ -11,7 +11,7 @@ wordList = [word for word in myDict]
 targetIndex = random.randint(0,len(wordList)-1)
 #target = wordList[targetIndex]
 
-target = "trade"
+target = "steal"
 starting = "trial"
 
 found = []
@@ -30,6 +30,7 @@ def start():
 
 
 def end(guess):
+    print(guess)
     if(guess == target):
         print("ez")
         quit()
@@ -48,9 +49,10 @@ def gameState(guess):
 
     for index,letter in enumerate(guess):
         if(letter == target[index]):
-            found.insert(index, letter)
-            foundIndices.append(index)
-            container.append(letter)
+            if(index not in foundIndices):
+                found.insert(index, letter)
+                foundIndices.append(index)
+                container.append(letter)
         elif(letter in target):
             container.append(letter)
         else:
@@ -61,10 +63,11 @@ def gameState(guess):
 
 
 def wordCheck():
+    
     for word in wordList:
         count = 0
         for num in foundIndices:
-            if((len(found) > 0) and (word[foundIndices[num]] == target[foundIndices[num]])):
+            if((len(foundIndices) > 0) and (word[num] == target[num])):
                 count+=1
         if(count == len(foundIndices)):
             possibilities.append(word)
@@ -84,7 +87,6 @@ def wordCheck():
     for word in possibilities:
         if word in toRemove:
             possibilities.remove(word)
-
 
     AI()
 
@@ -132,9 +134,8 @@ def AI():
             potentials[index] = word
             index += 1
             
-    
-    print(possibilities[0].strip())
     possibilities.remove(possibilities[0])
+
     gameState(possibilities[0].strip())
 
 '''
