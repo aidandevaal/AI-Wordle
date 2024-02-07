@@ -24,21 +24,10 @@ deadLetters = []
 possibilities = []
 
 
-#for index,letter in enumerate(starting):
-#    if(letter == target[index]):
-#        found.insert(index, letter)
-#        foundIndices.append(index)
-#        container.append(letter)
-#    elif(letter in target):
-#        container.append(letter)
-#    else:
-#        deadLetters.append(letter)
-
 def start():
     choice = input("Enter a string for the AI to crack: ")
-    end(choice)
     gameState(choice)
-    AI()
+
 
 def end(guess):
     if(guess == target):
@@ -46,13 +35,16 @@ def end(guess):
         quit()
 
 
-
 def xor(a, b):
     return ((a and not b) or (not a and b))
 
 
-
 def gameState(guess):
+
+    end(guess)
+
+    if(guess in possibilities):
+        possibilities.remove(guess)
 
     for index,letter in enumerate(guess):
         if(letter == target[index]):
@@ -64,10 +56,8 @@ def gameState(guess):
         else:
             deadLetters.append(letter)
 
-    if(guess in possibilities):
-        possibilities.remove(guess)
-    wordCheck()
 
+    wordCheck()
 
 
 def wordCheck():
@@ -86,10 +76,17 @@ def wordCheck():
         for letter in container:
             if(letter not in word):
                 toRemove.append(word)
+                break
+        for letter in deadLetters:
+            if(letter in word):
+                toRemove.append(word)
 
-    for word in toRemove:
-        possibilities.remove(word)
+    for word in possibilities:
+        if word in toRemove:
+            possibilities.remove(word)
 
+
+    AI()
 
 
 def AI():
@@ -127,15 +124,18 @@ def AI():
 
     potentials = ["aaaaa"] * len(possibilities)
     index = 0
-    for word in combinations:
+    for combo in combinations:
+        word = ""
+        for value in combo:
+            word += value
         if word in possibilities:
             potentials[index] = word
             index += 1
-
-    for word in combinations:
-        print(word)
-
             
+    
+    print(possibilities[0].strip())
+    possibilities.remove(possibilities[0])
+    gameState(possibilities[0].strip())
 
 '''
     print(likelihoods.keys())
