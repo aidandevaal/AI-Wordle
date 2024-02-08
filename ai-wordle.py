@@ -8,11 +8,10 @@ myDict = open("wdict.txt","r")
 
 wordList = [word for word in myDict]
 
-targetIndex = random.randint(0,len(wordList)-1)
-#target = wordList[targetIndex]
+#startIndex = random.randint(0,len(wordList)-1)
+#startingWord = wordList[startIndex].strip
 
-target = "steal"
-starting = "trial"
+startingWord = "canoe"
 
 found = []
 foundIndices = []
@@ -23,15 +22,17 @@ deadLetters = []
 
 possibilities = []
 
+guessed = []
+
 
 def start():
     choice = input("Enter a string for the AI to crack: ")
-    gameState(choice)
+    gameState(startingWord, choice)
 
 
-def end(guess):
+def end(guess, choice):
     print(guess)
-    if(guess == target):
+    if(guess == choice):
         print("ez")
         quit()
 
@@ -40,34 +41,34 @@ def xor(a, b):
     return ((a and not b) or (not a and b))
 
 
-def gameState(guess):
+def gameState(guess, choice):
 
-    end(guess)
+    end(guess, choice)
 
     if(guess in possibilities):
         possibilities.remove(guess)
 
     for index,letter in enumerate(guess):
-        if(letter == target[index]):
+        if(letter == choice[index]):
             if(index not in foundIndices):
                 found.insert(index, letter)
                 foundIndices.append(index)
                 container.append(letter)
-        elif(letter in target):
+        elif(letter in choice):
             container.append(letter)
         else:
             deadLetters.append(letter)
 
 
-    wordCheck()
+    wordCheck(choice)
 
 
-def wordCheck():
+def wordCheck(choice):
     
     for word in wordList:
         count = 0
         for num in foundIndices:
-            if((len(foundIndices) > 0) and (word[num] == target[num])):
+            if((len(foundIndices) > 0) and (word[num] == choice[num])):
                 count+=1
         if(count == len(foundIndices)):
             possibilities.append(word)
@@ -75,23 +76,24 @@ def wordCheck():
     toRemove = []
 
     for word in possibilities:
-        count = 0
         for letter in container:
             if(letter not in word):
                 toRemove.append(word)
-                break
-        for letter in deadLetters:
-            if(letter in word):
+    
+    for word in possibilities:
+        for letter in word:
+            if(letter in deadLetters):
+                print(word)
                 toRemove.append(word)
 
     for word in possibilities:
         if word in toRemove:
             possibilities.remove(word)
 
-    AI()
+    AI(choice)
 
 
-def AI():
+def AI(choice):
     likelihoods = {}
     for word in possibilities:
         for letter in word:
@@ -124,19 +126,13 @@ def AI():
         combinations[index] = word
         index += 1
 
-    potentials = ["aaaaa"] * len(possibilities)
-    index = 0
-    for combo in combinations:
-        word = ""
-        for value in combo:
-            word += value
-        if word in possibilities:
-            potentials[index] = word
-            index += 1
-            
+    for word in possibilities:
+        if(word in guessed):
+            possibilities.remove(word)
+    
     possibilities.remove(possibilities[0])
 
-    gameState(possibilities[0].strip())
+    gameState(possibilities[0].strip(), choice)
 
 '''
     print(likelihoods.keys())
