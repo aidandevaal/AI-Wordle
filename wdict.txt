@@ -1088,6 +1088,7 @@ smell
 smile
 smith
 smoke
+snack
 snake
 socks
 solar

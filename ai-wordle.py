@@ -22,6 +22,8 @@ deadLetters = []
 
 possibilities = []
 
+toRemove = []
+
 guessed = []
 
 
@@ -43,6 +45,8 @@ def xor(a, b):
 
 def gameState(guess, choice):
 
+    guessed.append(guess)
+
     end(guess, choice)
 
     if(guess in possibilities):
@@ -50,14 +54,15 @@ def gameState(guess, choice):
 
     for index,letter in enumerate(guess):
         if(letter == choice[index]):
-            if(index not in foundIndices):
+            if(index not in foundIndices and letter not in container):
                 found.insert(index, letter)
                 foundIndices.append(index)
                 container.append(letter)
         elif(letter in choice):
             container.append(letter)
         else:
-            deadLetters.append(letter)
+            if(letter not in deadLetters):
+                deadLetters.append(letter)
 
 
     wordCheck(choice)
@@ -73,21 +78,20 @@ def wordCheck(choice):
         if(count == len(foundIndices)):
             possibilities.append(word)
 
-    toRemove = []
-
     for word in possibilities:
         for letter in container:
             if(letter not in word):
                 toRemove.append(word)
+                break
     
     for word in possibilities:
-        for letter in word:
-            if(letter in deadLetters):
-                print(word)
+        for letter in deadLetters:
+            if(letter in word):
                 toRemove.append(word)
+                break
 
-    for word in possibilities:
-        if word in toRemove:
+    for word in toRemove:
+        if(word in possibilities):
             possibilities.remove(word)
 
     AI(choice)
@@ -145,17 +149,6 @@ def AI(choice):
 
 def main():
     start()
-    for word in possibilities:
-        print(word)
-
-    print("Container: ")
-
-    for letter in container:
-        print(letter)
-
-    print("Found: ")
-    for letter in found:
-        print(letter)
 
 
 if __name__ == '__main__':
