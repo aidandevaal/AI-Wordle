@@ -133,8 +133,9 @@ def AI(choice):
     for word in possibilities:
         if(word in guessed):
             possibilities.remove(word)
-    
-    possibilities.remove(possibilities[0])
+
+    if(len(possibilities)>1):
+        possibilities.remove(possibilities[0])
 
     gameState(possibilities[0].strip(), choice)
 
