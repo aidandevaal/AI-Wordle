@@ -7,7 +7,7 @@ import itertools
 #import random
 
 # -- Read from dictionary file
-myDict = open("edict.txt","r")
+myDict = open("wdict.txt","r")
 
 # -- Create word list of all potential words
 wordList = [word for word in myDict]
@@ -79,13 +79,14 @@ def gameState(guess, choice):
         # -- If the current letter from the guess matches the letter at the chosen word's matching index
         # -- And the index has not already been found (should be inherent but is used for error-checking)
         # -- And the letter is not already in the container (avoid mass duplication of letters in container list)
-        if(letter == choice[index] and index not in foundIndices and letter not in container):
-            # -- Add letter at index in list
-            found.insert(index, letter)
-            # -- Add index to found indices (for overlap error checking mentioned above)
-            foundIndices.insert(index, index)
-            # -- Add the letter to the container since the word contains the letter (avoid removal later) -> also checks for duplicates
-            container.append(letter)
+        if(letter == choice[index]):
+            if(index not in foundIndices and letter not in container):
+                # -- Add letter at index in list
+                found.insert(index, letter)
+                # -- Add index to found indices (for overlap error checking mentioned above)
+                foundIndices.insert(index, index)
+                # -- Add the letter to the container since the word contains the letter (avoid removal later) -> also checks for duplicates
+                container.append(letter)
         # -- If the letter is not in the right spot but is in the word -> add it to the container
         elif(letter in choice):
             container.append(letter)
@@ -110,9 +111,6 @@ def wordCheck(choice):
             # -- If the word from the list has the same letters in the same positions, of the found letters and indices, as the chosen word 
             if((len(foundIndices) > 0) and (word[num] == choice[num])):
                 count+=1
-            elif((len(foundIndices) > 0)  and (found[num] and (word[num] != found[num]))):
-                toRemove.append(word)
-                break
         # -- If all the found indices of letters match -> add that word to the possibilities
         if(count == len(foundIndices)):
             possibilities.append(word)
