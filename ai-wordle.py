@@ -90,11 +90,21 @@ def gameState(guess, choice):
         # -- If the letter is not in the right spot but is in the word -> add it to the container
         elif(letter in choice):
             container.append(letter)
+            # -- Add letter to container dictionary to track locations guessed 
+            if(letter not in containerDict):
+                containerDict[letter] = str(index)
+            else:
+                cur = containerDict.get(letter)
+                cur += str(index)
+                containerDict.update({letter:cur})
         # -- Any other case the letter is dead
         else:
             if(letter not in deadLetters):
                 deadLetters.append(letter)
 
+    #print(containerDict.keys())
+    #print(containerDict.values())
+                
     # -- Pass choice to wordCheck
     wordCheck(choice)
 
@@ -125,6 +135,16 @@ def wordCheck(choice):
             if((letter not in word)):
                 toRemove.append(word)
                 break
+        index = 0
+        for letter in word:
+            if(letter in containerDict):
+                indices = containerDict.get(letter)
+                for num in indices:
+                    if(int(num) == index):
+                        toRemove.append(word)
+                        break
+            index += 1
+
     
     # -- Loop the words again checking for letters that are dead, in the possibilities. If found -> remove them
     for word in possibilities:
