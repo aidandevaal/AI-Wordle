@@ -1,4 +1,6 @@
 
+### -- Original text document used
+
 update_dict = open("wordlist.txt","r")
 
 len5 = [line for line in update_dict if len(line.strip())==5]

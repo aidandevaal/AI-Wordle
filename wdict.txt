@@ -1018,6 +1018,7 @@ scope
 score
 scott
 scout
+scram
 screw
 scuba
 seats
@@ -1138,7 +1139,9 @@ steel
 steps
 steve
 stick
+stiff
 still
+stoae
 stock
 stone
 stood
