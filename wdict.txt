@@ -602,14 +602,12 @@ james
 jamie
 janet
 japan
-jason
 jeans
 jenny
 jerry
 jesse
 jesus
 jewel
-jimmy
 johns
 joins
 joint
@@ -796,6 +794,7 @@ naked
 named
 names
 nancy
+nanny
 nasty
 naval
 needs
@@ -1091,6 +1090,7 @@ smith
 smoke
 snack
 snake
+sneak
 socks
 solar
 solid
@@ -1176,6 +1176,7 @@ taken
 takes
 tales
 talks
+talon
 tamil
 tampa
 tanks

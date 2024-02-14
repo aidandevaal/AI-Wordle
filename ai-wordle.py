@@ -47,6 +47,7 @@ guessed = []
 # -- Allows user to choose the word for the bot to solve
 def start():
     choice = input("Enter a string for the AI to crack: ")
+
     gameState(startingWord, choice)
 
 
@@ -55,7 +56,11 @@ def end(guess, choice):
     print(guess)
     if(guess == choice):
         print("ez")
-        quit()
+        cont = input("Type 'Y' to continue: ").lower()
+        if(cont == "y"):
+            start()
+        else:
+            quit()
 
 # -- xor function that did not end up being used but could still be handy
 #def xor(a, b):
