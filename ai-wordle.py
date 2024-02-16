@@ -188,10 +188,7 @@ def wordCheck(choice):
                         toRemove.append(word)
                         break
             index += 1
-
-    
-    # -- Loop the words again checking for letters that are dead, in the possibilities. If found -> remove them
-    for word in possibilities:
+        # -- Check for letters that are dead in the possibilities. If found -> remove them
         for letter in deadLetters:
             if(letter in word):
                 toRemove.append(word)
