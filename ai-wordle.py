@@ -43,10 +43,48 @@ toRemove = []
 # -- Tracks all guessed words -- For curiosity's sake
 guessed = []
 
+def reset():
+    if(len(found)>0):
+        while(len(found)>0):
+            found.pop(0)
+
+    if(len(foundIndices)>0):
+        while(len(foundIndices)>0):
+            foundIndices.pop(0)
+
+    if(len(container)>0):
+        while(len(container)>0):
+            container.pop(0)
+
+    if(len(containerDict)>0):
+        while(len(containerDict)>0):
+            containerDict.popitem()
+
+    if(len(deadLetters)>0):
+        while(len(deadLetters)>0):
+            deadLetters.pop(0)
+
+    if(len(possibilities)>0):
+        while(len(possibilities)>0):
+            possibilities.pop(0)
+
+    if(len(toRemove)>0):
+        while(len(toRemove)>0):
+            toRemove.pop(0)
+
+    if(len(guessed)>0):
+        while(len(guessed)>0):
+            guessed.pop(0)
+
+    start()
 
 # -- Allows user to choose the word for the bot to solve
 def start():
     choice = input("Enter a string for the AI to crack: ")
+
+    if(len(choice) != 5):
+        print("Word must be 5 letters long.")
+        start()
 
     gameState(startingWord, choice)
 
@@ -56,9 +94,9 @@ def end(guess, choice):
     print(guess)
     if(guess == choice):
         print("ez")
-        cont = input("Type 'Y' to continue: ").lower()
-        if(cont == "y"):
-            start()
+        cont = input("Press 'Y' to continue: ").lower()
+        if(cont == 'y'):
+            reset()
         else:
             quit()
 
