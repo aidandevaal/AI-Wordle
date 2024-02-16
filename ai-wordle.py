@@ -257,7 +257,7 @@ def AI(choice):
         if(word in guessed):
             possibilities.remove(word)
 
-    # -- Remove top word so long as the last word isn't the correct word
+    # -- Remove top word to avoid duplicates
     if(len(possibilities)>1):
         possibilities.remove(possibilities[0])
     # -- Run gameState again using the first word in possibilities since the entries are added in order of most commonly appearing letter...
