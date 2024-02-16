@@ -43,6 +43,7 @@ toRemove = []
 # -- Tracks all guessed words -- For curiosity's sake
 guessed = []
 
+# -- Function to reset all lists and dictionaries for repetition
 def reset():
     if(len(found)>0):
         while(len(found)>0):

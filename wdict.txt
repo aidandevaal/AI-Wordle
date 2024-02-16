@@ -64,6 +64,7 @@ array
 arrow
 aruba
 ascii
+ascot
 asian
 aside
 asked
