@@ -87,6 +87,14 @@ def start():
         print("Word must be 5 letters long.")
         start()
 
+    #if(choice.strip() not in wordList):
+    #    upDict = open("wdict.txt","w")
+    #    for word in upDict:
+    #        if(choice.strip() > word):
+    #            word.join("\n" + choice + "\n")
+    #    wordList = [word for word in upDict]
+    #    print("Word added.")
+
     gameState(startingWord, choice)
 
 
@@ -94,7 +102,7 @@ def start():
 def end(guess, choice):
     print(guess)
     if(guess == choice):
-        print("ez")
+        print("SOLVED")
         cont = input("Press 'Y' to continue: ").lower()
         if(cont == 'y'):
             reset()
@@ -174,11 +182,6 @@ def wordCheck(choice):
     # -- Now that we have all the words with the right letters in the right positions
     # -- Loop the letters in those words and check that they're in the container
     for word in possibilities:
-        for letter in container:
-            # -- If a letter that IS in the word IS NOT in word in possibilities -> add it to the list of words to remove
-            if((letter not in word)):
-                toRemove.append(word)
-                break
         index = 0
         for letter in word:
             if(letter in containerDict):
@@ -188,6 +191,11 @@ def wordCheck(choice):
                         toRemove.append(word)
                         break
             index += 1
+        for letter in container:
+            # -- If a letter that IS in the word IS NOT in word in possibilities -> add it to the list of words to remove
+            if((letter not in word)):
+                toRemove.append(word)
+                break
         # -- Check for letters that are dead in the possibilities. If found -> remove them
         for letter in deadLetters:
             if(letter in word):
@@ -267,9 +275,6 @@ def AI(choice):
 '''
 
 
-
-
-
 def main():
     start()
 
@@ -277,13 +282,3 @@ def main():
 if __name__ == '__main__':
     main()
             
-
-
-
-
-
-
-
-
-
-

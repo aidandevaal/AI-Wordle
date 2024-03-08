@@ -1127,10 +1127,12 @@ squad
 stack
 staff
 stage
+stain
 stamp
 stand
 stars
 start
+stash
 state
 stats
 stays
@@ -1142,6 +1144,7 @@ steve
 stick
 stiff
 still
+sting
 stoae
 stock
 stone
